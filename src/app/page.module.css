@@ -1,18 +1,19 @@
 .main {
     display: flex;
     flex-direction: column;
-    gap: 30px;
-    padding: 0 30px;
     align-items: center;
     min-height: 100vh;
+    overflow-x: hidden;
 
     & .homepage {
         width: 100%;
         min-height: 100vh;
         display: flex;
+        margin-bottom: 120px;
 
         & .title {
             width: fit-content;
+            padding-left: 30px;
             display: flex;
             flex-direction: column;
             align-items: flex-end;
@@ -37,5 +38,10 @@
         & .scene {
             flex: 2;
         }
+    }
+
+    & .bannerContainer {
+        overflow: hidden;
+        padding: 30px;
     }
 }

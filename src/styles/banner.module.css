@@ -1,0 +1,27 @@
+.container {
+    overflow: hidden;
+    width: 110%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+
+    & .bannerContent {
+        display: flex;
+        white-space: nowrap;
+        align-items: center;
+
+        & .banner {
+            display: flex;
+            align-items: center;
+            margin-right: 50px;
+
+            & p {
+                font-size: 50px;
+                font-weight: 600;
+                margin-left: 10px;
+                color: var(--black);
+            }
+        }
+    }
+}

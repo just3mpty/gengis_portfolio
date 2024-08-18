@@ -15,11 +15,11 @@ const ProjectCard = ({ title, date, cover, url }: ProjectProps) => {
         <Link href={url} className={styles.card}>
             <figure style={{ position: "relative" }}>
                 <Image src={cover} alt={`${title}'s illustration`} fill />
-                <figcaption>
-                    <p>{title}</p>
-                    <p>{date}</p>
-                </figcaption>
             </figure>
+            <div className={styles.text}>
+                <p>{title}</p>
+                <p className={styles.date}>{date}</p>
+            </div>
         </Link>
     );
 };

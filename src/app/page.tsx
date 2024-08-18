@@ -2,6 +2,7 @@ import Scene from "@/components/canva/Scene";
 import styles from "./page.module.css";
 import Banner from "@/components/banner/Banner";
 import SelectedWorks from "@/components/selectedWorks/SelectedWorks";
+import AllWorks from "@/components/works/AllWorks";
 
 export default function Home() {
     return (
@@ -21,11 +22,23 @@ export default function Home() {
             </section>
 
             {/* MOVING BANNERS */}
-            <Banner background="var(--accent)" text="HIGHLIGHTS" />
-            <Banner background="var(--white)" text="SELECTED WORKS" />
+            <Banner
+                background="var(--white)"
+                text="HIGHLIGHTS"
+                direction="left"
+                angle={-2}
+            />
+            <Banner
+                background="var(--accent)"
+                text="SELECTED WORKS"
+                direction="right"
+            />
 
             {/* SELECTED WORKS */}
             <SelectedWorks />
+
+            {/* ALL WORKS */}
+            <AllWorks />
         </main>
     );
 }
