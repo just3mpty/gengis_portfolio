@@ -23,7 +23,7 @@ const Banner = ({
     const x = useTransform(
         scrollY,
         [0, 1500],
-        direction === "left" ? [0, -250] : [0, 250]
+        direction === "left" ? [0, -300] : [0, 300]
     );
 
     useEffect(() => {
