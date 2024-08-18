@@ -4,7 +4,7 @@ import styles from "./page.module.css";
 export default function Home() {
     return (
         <main className={styles.main}>
-            <section id="homepage">
+            <section id="homepage" className={styles.homepage}>
                 <div className={styles.title}>
                     <h1>Gengis</h1>
                     <h2>

@@ -9,14 +9,12 @@ const Model = () => {
 
     useFrame(() => {
         if (mesh.current) {
-            mesh.current.rotation.x -= 0.0025;
-            mesh.current.rotation.y -= 0.0025;
-            mesh.current.rotation.z -= 0.0025;
+            mesh.current.rotation.z -= 0.005;
         }
     });
 
     return (
-        <group scale={15} position={[0, -0.2, -4]}>
+        <group scale={15} position={[1, 0, 0]}>
             <primitive object={nodes.rose} ref={mesh}>
                 <MeshTransmissionMaterial
                     roughness={0.15}

@@ -7,9 +7,8 @@ import Model from "./Model";
 const Scene = () => {
     return (
         <Canvas>
-            <OrbitControls />
             <directionalLight intensity={3} position={[0, 3, 2]} />
-            <Environment preset="city" />
+            <Environment preset="studio" />
             <Model />
         </Canvas>
     );
