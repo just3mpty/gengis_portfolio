@@ -3,6 +3,7 @@ import styles from "./page.module.css";
 import Banner from "@/components/banner/Banner";
 import SelectedWorks from "@/components/selectedWorks/SelectedWorks";
 import AllWorks from "@/components/works/AllWorks";
+import About from "@/components/about/About";
 
 export default function Home() {
     return (
@@ -39,6 +40,9 @@ export default function Home() {
 
             {/* ALL WORKS */}
             <AllWorks />
+
+            {/* ABOUT */}
+            <About />
         </main>
     );
 }
