@@ -1,8 +1,50 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import styles from "@/styles/works.module.css";
 import Image from "next/image";
+import Link from "next/link";
+
+const Category = [
+    {
+        category: "freelance",
+        image: "/images/205.png",
+        text: "Freelance Projects",
+    },
+    {
+        category: "personnal",
+        image: "/images/morflax-studio.png",
+        text: "Personnal stuff",
+    },
+];
 
 const AllWorks = () => {
+    const [hovering, setHovering] = useState<boolean[]>(
+        Array(Category.length).fill(false)
+    );
+    const [heights, setHeights] = useState<number[]>(
+        Array(Category.length).fill(150)
+    );
+
+    const handleMouseEnter = (index: number) => {
+        const newHeights = [...heights];
+        newHeights[index] = 300;
+        setHeights(newHeights);
+
+        const newHovering = [...hovering];
+        newHovering[index] = true; // Applique le survol pour l'image spécifique
+        setHovering(newHovering);
+    };
+
+    const handleMouseLeave = (index: number) => {
+        const newHeights = [...heights];
+        newHeights[index] = 150;
+        setHeights(newHeights);
+
+        const newHovering = [...hovering];
+        newHovering[index] = false; // Réinitialise l'état de survol pour l'image
+        setHovering(newHovering);
+    };
+
     return (
         <section id="works" className={styles.container}>
             <div className={styles.title}>
@@ -11,25 +53,31 @@ const AllWorks = () => {
                 </h2>
             </div>
             <div className={styles.categories}>
-                <div className={styles.category}>
-                    <Image
-                        src={"/images/205.png"}
-                        alt="Category illustration"
-                        fill
-                    />
-                    <div className={styles.overlay} />
-                    <p>Freelance projects</p>
-                </div>
-                <div className={styles.category}>
-                    <Image
-                        src={"/images/205.png"}
-                        alt="Category illustration"
-                        fill
-                    />
-
-                    <div className={styles.overlay} />
-                    <p>Personnal stuff</p>
-                </div>
+                {Category.map((cat, idx) => (
+                    <Link
+                        onMouseEnter={() => handleMouseEnter(idx)}
+                        onMouseLeave={() => handleMouseLeave(idx)}
+                        key={idx}
+                        style={{
+                            height: heights[idx],
+                            transition: "height 0.3s ease",
+                        }}
+                        href={`/works/${cat.category}`}
+                        className={styles.category}>
+                        <Image
+                            src={cat.image}
+                            alt={`${cat.category}'s projects`}
+                            style={
+                                hovering[idx]
+                                    ? { filter: "none", opacity: 1 } // Effet au survol
+                                    : { filter: "grayscale(1)", opacity: 0.5 } // Effet par défaut
+                            }
+                            fill
+                        />
+                        {/* <div className={styles.overlay} /> */}
+                        <p>{cat.text}</p>
+                    </Link>
+                ))}
             </div>
         </section>
     );

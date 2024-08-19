@@ -12,7 +12,7 @@ const works = [
     {
         title: "Project title",
         date: "08.18.2024",
-        cover: "/images/205.png",
+        cover: "/images/morflax-studio.png",
         url: "/",
     },
 ];

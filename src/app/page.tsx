@@ -24,12 +24,7 @@ export default function Home() {
             </section>
 
             {/* MOVING BANNERS */}
-            <Banner
-                background="var(--white)"
-                text="HIGHLIGHTS"
-                direction="left"
-                angle={-2}
-            />
+            <Banner background="var(--white)" text="HIGHLIGHTS" angle={-2} />
             <Banner
                 background="var(--accent)"
                 text="SELECTED WORKS"

@@ -38,6 +38,8 @@
 
             & img {
                 object-fit: cover;
+                opacity: 0.5;
+                filter: grayscale(1);
             }
 
             & .overlay {
