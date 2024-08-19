@@ -1,0 +1,22 @@
+[
+    {
+        "category": "freelance",
+        "projects": [
+            {
+                "title": "Test Freelance",
+                "images": ["/images/205.png", "/images/morflax-studio.png"],
+                "date": "08.19.2024"
+            }
+        ]
+    },
+    {
+        "category": "personnal",
+        "projects": [
+            {
+                "title": "Test Perso",
+                "images": ["/images/205.png", "/images/morflax-studio.png"],
+                "date": "08.19.2024"
+            }
+        ]
+    }
+]

@@ -31,7 +31,7 @@ const AllWorks = () => {
         setHeights(newHeights);
 
         const newHovering = [...hovering];
-        newHovering[index] = true; // Applique le survol pour l'image spécifique
+        newHovering[index] = true;
         setHovering(newHovering);
     };
 
@@ -41,7 +41,7 @@ const AllWorks = () => {
         setHeights(newHeights);
 
         const newHovering = [...hovering];
-        newHovering[index] = false; // Réinitialise l'état de survol pour l'image
+        newHovering[index] = false;
         setHovering(newHovering);
     };
 
@@ -69,12 +69,14 @@ const AllWorks = () => {
                             alt={`${cat.category}'s projects`}
                             style={
                                 hovering[idx]
-                                    ? { filter: "none", opacity: 1 } // Effet au survol
-                                    : { filter: "grayscale(1)", opacity: 0.5 } // Effet par défaut
+                                    ? { filter: "none", opacity: 1 }
+                                    : {
+                                          filter: "grayscale(1)",
+                                          opacity: 0.5,
+                                      }
                             }
                             fill
                         />
-                        {/* <div className={styles.overlay} /> */}
                         <p>{cat.text}</p>
                     </Link>
                 ))}
