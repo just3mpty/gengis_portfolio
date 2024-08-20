@@ -1,9 +1,7 @@
 .cursor {
-    position: fixed;
     border-radius: 50%;
     background-color: #fbff4f;
     pointer-events: none;
-    transform: translate(-50%, -50%);
     mix-blend-mode: difference;
     z-index: 9999;
     transition: width 0.3s ease, height 0.3s ease;

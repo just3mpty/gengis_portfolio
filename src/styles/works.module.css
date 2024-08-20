@@ -142,5 +142,6 @@
         font-weight: 900;
         text-transform: uppercase;
         color: var(--black);
+        margin-bottom: 60px;
     }
 }

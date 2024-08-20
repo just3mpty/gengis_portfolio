@@ -39,9 +39,6 @@ export default function Home() {
 
             {/* ABOUT */}
             <About />
-
-            {/* FOOTER */}
-            <Footer />
         </main>
     );
 }

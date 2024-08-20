@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Barlow } from "next/font/google";
 import "./globals.css";
-import ToggleButton from "@/components/menu/ToggleButton";
-import CustomCursor from "@/components/cursor/Cursor";
 
 const barlow = Barlow({
     subsets: ["latin"],
@@ -21,11 +19,7 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
-            <body className={barlow.className}>
-                <CustomCursor />
-                <ToggleButton />
-                {children}
-            </body>
+            <body className={barlow.className}>{children}</body>
         </html>
     );
 }
