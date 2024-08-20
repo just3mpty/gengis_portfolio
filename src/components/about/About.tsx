@@ -6,7 +6,7 @@ import Image from "next/image";
 
 const About = () => {
     return (
-        <section className={styles.container}>
+        <section id="about" className={styles.container}>
             <h2>
                 About <span>me</span>
             </h2>

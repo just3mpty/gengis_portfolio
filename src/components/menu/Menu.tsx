@@ -19,15 +19,15 @@ const links: MenuLinks[] = [
     },
     {
         name: "Projects",
-        path: "/",
+        path: "/#projects",
     },
     {
         name: "About",
-        path: "/",
+        path: "/#about",
     },
     {
         name: "Contact",
-        path: "/",
+        path: "/#contact",
     },
 ];
 

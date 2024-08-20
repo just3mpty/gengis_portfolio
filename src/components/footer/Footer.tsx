@@ -41,7 +41,7 @@ const socials: Links[] = [
 
 const Footer = () => {
     return (
-        <footer className={styles.footer}>
+        <footer id="contact" className={styles.footer}>
             <h2>
                 What if we worked <br /> <span>together</span>
             </h2>

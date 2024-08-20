@@ -46,7 +46,7 @@ const AllWorks = () => {
     };
 
     return (
-        <section id="works" className={styles.container}>
+        <section id="projects" className={styles.container}>
             <div className={styles.title}>
                 <h2>
                     More of my <br /> <span>works</span>
