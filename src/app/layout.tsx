@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Barlow } from "next/font/google";
 import "./globals.css";
+import ToggleButton from "@/components/menu/ToggleButton";
 
 const barlow = Barlow({
     subsets: ["latin"],
@@ -19,7 +20,10 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
-            <body className={barlow.className}>{children}</body>
+            <body className={barlow.className}>
+                <ToggleButton />
+                {children}
+            </body>
         </html>
     );
 }
