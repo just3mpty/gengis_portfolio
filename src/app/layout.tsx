@@ -22,7 +22,7 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body className={barlow.className}>
-                <CustomCursor isHovering={false} />
+                <CustomCursor />
                 <ToggleButton />
                 {children}
             </body>

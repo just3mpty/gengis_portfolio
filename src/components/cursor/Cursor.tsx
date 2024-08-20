@@ -2,13 +2,9 @@
 import React, { useEffect, useState } from "react";
 import styles from "@/styles/customCursor.module.css";
 
-interface CustomCursorProps {
-    isHovering: boolean;
-}
-
-const CustomCursor = ({ isHovering }: CustomCursorProps) => {
+const CustomCursor = () => {
     const [position, setPosition] = useState({ x: 0, y: 0 });
-    const size = isHovering ? 120 : 30;
+    const [size, setSize] = useState(30);
 
     useEffect(() => {
         const moveCursor = (e: MouseEvent) => {
@@ -24,6 +20,7 @@ const CustomCursor = ({ isHovering }: CustomCursorProps) => {
 
     return (
         <div
+            id="cursor"
             className={styles.cursor}
             style={{
                 left: `${position.x}px`,
