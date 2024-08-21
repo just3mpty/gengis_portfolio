@@ -16,11 +16,7 @@ const Model = () => {
     return (
         <group scale={15} position={[1, 0, 0]}>
             <primitive object={nodes.rose} ref={mesh}>
-                <MeshTransmissionMaterial
-                    roughness={0.15}
-                    metalness={1}
-                    color={0xfbff4f}
-                />
+                <MeshTransmissionMaterial metalness={1} color={0xffffff} />
             </primitive>
         </group>
     );
