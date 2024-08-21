@@ -29,7 +29,6 @@ export default function Template({ children }: { children: ReactNode }) {
                     <Cursor />
                     <ToggleButton />
                     {children}
-                    <Footer />
                 </>
             </motion.main>
         </ReactLenis>

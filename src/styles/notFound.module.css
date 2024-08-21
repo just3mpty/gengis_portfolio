@@ -1,0 +1,53 @@
+.container {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 0;
+
+    & .scene {
+        height: 100%;
+        width: 100%;
+    }
+
+    & h1 {
+        position: absolute;
+        font-size: 600px;
+        font-weight: 900;
+        color: var(--white);
+        mix-blend-mode: difference;
+    }
+
+    & .content {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+
+        & p {
+            font-size: 20px;
+        }
+        & .links {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+
+            & .link {
+                padding: 15px 60px;
+                background: var(--accent);
+                color: var(--black);
+                font-weight: 900;
+                text-transform: uppercase;
+                cursor: pointer;
+            }
+            & .link:nth-child(2) {
+                background-color: var(--white);
+            }
+        }
+    }
+}

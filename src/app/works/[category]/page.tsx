@@ -84,6 +84,8 @@ const Category = ({ params }: { params: { category: string } }) => {
             <Link className={styles.button} href={`/works/${otherCategory}`}>
                 check my {otherCategory} projects
             </Link>
+
+            <Footer />
         </section>
     );
 };
