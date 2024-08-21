@@ -5,10 +5,12 @@ import styles from "@/styles/dashboard.module.css";
 
 const CreateProjectPage = () => {
     return (
-        <div>
+        <div className={styles.addProject}>
+            <h1>Ajouter un nouveau projet</h1>
             <Form />
-
-            <Link href={"/"}>Go back home</Link>
+            <Link className={styles.goBack} href={"/dashboard"}>
+                Go back
+            </Link>
         </div>
     );
 };

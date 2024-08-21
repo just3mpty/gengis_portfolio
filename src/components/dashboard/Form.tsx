@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 "use client";
 import React, { useState } from "react";
 import styles from "@/styles/dashboard.module.css";
@@ -73,9 +74,10 @@ const Form = () => {
     return (
         <form onSubmit={handleSubmit}>
             {/* Menu pour choisir la catégorie du projet (freelance ou personnal) */}
-            <div className="input">
+            <div className={styles.input}>
                 <label htmlFor="category">Catégorie</label>
                 <select
+                    className={styles.select}
                     id="category"
                     value={formData.category}
                     onChange={handleChange}>
@@ -85,8 +87,10 @@ const Form = () => {
                 </select>
             </div>
 
-            <div className="inputsContainer">
-                <div className="input">
+            <div className={styles.divider} />
+
+            <div className={styles.inputsContainer}>
+                <div className={styles.input}>
                     <label htmlFor="title">Titre du projet</label>
                     <input
                         id="title"
@@ -97,7 +101,7 @@ const Form = () => {
                     />
                 </div>
 
-                <div className="input">
+                <div className={styles.input}>
                     <label htmlFor="description">Description du projet</label>
                     <textarea
                         id="description"
@@ -107,7 +111,7 @@ const Form = () => {
                     />
                 </div>
 
-                <div className="input">
+                <div className={styles.input}>
                     <label htmlFor="date">Date de création du projet</label>
                     <input
                         id="date"
@@ -117,7 +121,7 @@ const Form = () => {
                     />
                 </div>
 
-                <div className="input">
+                <div className={styles.input}>
                     <label htmlFor="images">
                         Images de présentation du projet
                     </label>
@@ -130,7 +134,7 @@ const Form = () => {
                     />
                 </div>
 
-                <div className="input">
+                <div className={styles.input}>
                     <label htmlFor="highlight">
                         Mettre en avant ce projet ?
                     </label>
@@ -142,13 +146,19 @@ const Form = () => {
                     />
                 </div>
 
-                <div className="input">
+                <div className={styles.input}>
                     <label htmlFor="tools">
                         Outils utilisés dans la réalisation du projet
                     </label>
+                    <p>
+                        Bon à savoir : Pour ajouter plusieurs outils, ajouter un
+                        nouveau champ de saisie avec le bouton "Ajouter un
+                        outil"
+                    </p>
                     {formData.tools.map((tool, index) => (
                         <div key={index}>
                             <input
+                                placeholder="Exemple: Blender"
                                 type="text"
                                 value={tool}
                                 onChange={(e) =>
