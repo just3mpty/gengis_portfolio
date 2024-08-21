@@ -5,7 +5,7 @@ import Link from "next/link";
 
 interface ProjectProps {
     title: string;
-    date: string;
+    date?: string;
     cover: string;
     url: string;
 }

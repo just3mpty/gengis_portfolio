@@ -25,7 +25,7 @@ const Cursor = () => {
 
         window.addEventListener("mousemove", handleMouseMove);
 
-        const elements = document.querySelectorAll("a, button");
+        const elements = document.querySelectorAll("a");
         elements.forEach((element) => {
             element.addEventListener("mouseenter", handleMouseEnter);
             element.addEventListener("mouseleave", handleMouseLeave);
