@@ -36,11 +36,16 @@
             width: 100%;
             min-height: 150px;
 
-            & img {
-                object-fit: cover;
+            & .parallax {
+                width: 100%;
+                height: 100%;
+                position: relative;
                 opacity: 0.5;
-                filter: grayscale(1);
                 transition: 0.3s ease;
+
+                & img {
+                    object-fit: cover;
+                }
             }
 
             & .overlay {

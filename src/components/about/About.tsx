@@ -1,8 +1,8 @@
 /* eslint-disable react/no-unescaped-entities */
+"use client";
 import React from "react";
 import styles from "@/styles/about.module.css";
-import Scene from "../canva/Scene";
-import Image from "next/image";
+import { ParallaxBanner, ParallaxBannerLayer } from "react-scroll-parallax";
 
 const About = () => {
     return (
@@ -11,9 +11,12 @@ const About = () => {
                 About <span>me</span>
             </h2>
             <div className={styles.content}>
-                <figure>
-                    <Image src={"/images/205.png"} alt="Profile Pic" fill />
-                </figure>
+                <ParallaxBanner className={styles.parallax}>
+                    <ParallaxBannerLayer
+                        speed={-10}
+                        image={"/images/205.png"}
+                    />
+                </ParallaxBanner>
                 <div className={styles.text}>
                     <p>
                         I'm Gengis, I work as a <span>freelance</span> 3D

@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import styles from "@/styles/works.module.css";
 import Image from "next/image";
 import Link from "next/link";
+import { ParallaxBanner, ParallaxBannerLayer } from "react-scroll-parallax";
 
 const Category = [
     {
@@ -64,9 +65,7 @@ const AllWorks = () => {
                         }}
                         href={`/works/${cat.category}`}
                         className={styles.category}>
-                        <Image
-                            src={cat.image}
-                            alt={`${cat.category}'s projects`}
+                        <ParallaxBanner
                             style={
                                 hovering[idx]
                                     ? { filter: "none", opacity: 1 }
@@ -75,8 +74,12 @@ const AllWorks = () => {
                                           opacity: 0.5,
                                       }
                             }
-                            fill
-                        />
+                            className={styles.parallax}>
+                            <ParallaxBannerLayer
+                                image={cat.image}
+                                speed={-10}
+                            />
+                        </ParallaxBanner>
                         <p>{cat.text}</p>
                     </Link>
                 ))}

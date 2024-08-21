@@ -25,8 +25,14 @@ export default function RootLayout({
         image: "https://pbs.twimg.com/profile_images/1668933141719908352/mA8pJmIl_400x400.jpg",
         "@id": "https://pbs.twimg.com/profile_images/1668933141719908352/mA8pJmIl_400x400.jpg",
         url: "https://gengis3d.vercel.app/",
-        telephone: "0659920450",
+
+        // AJOUTER TELEPHONE
+        telephone: "",
+        //
+
         priceRange: "$$",
+
+        // AJOUTER ADRESSED
         address: {
             "@type": "PostalAddress",
             streetAddress: "",
@@ -34,6 +40,8 @@ export default function RootLayout({
             postalCode: "",
             addressCountry: "FR",
         },
+        //
+
         openingHoursSpecification: {
             "@type": "OpeningHoursSpecification",
             dayOfWeek: [
@@ -51,7 +59,7 @@ export default function RootLayout({
     return (
         <html lang="en">
             <head>
-                <link rel="icon" href="/logo.svg" />
+                {/* <link rel="icon" href="/logo.svg" /> */}
                 <meta name="twitter:card" content="summary" />
                 <meta name="twitter:site" content="@Gengis10_" />
                 <meta name="twitter:title" content="Gengis - 3D Artist" />

@@ -21,10 +21,10 @@
         align-items: center;
         gap: 120px;
 
-        & figure {
-            position: relative;
+        & .parallax {
+            max-width: 500px;
+            /* position: relative; */
             aspect-ratio: 1/1;
-            width: 500px;
 
             & img {
                 object-fit: cover;
