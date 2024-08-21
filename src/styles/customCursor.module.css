@@ -1,12 +1,12 @@
 .cursor {
+    position: fixed;
     border-radius: 50%;
     background-color: #fbff4f;
     pointer-events: none;
     mix-blend-mode: difference;
     z-index: 9999;
-    transition: width 0.3s ease, height 0.3s ease;
-}
-.hovered {
-    width: 120px;
-    height: 120px;
+    transition: width 0.5s ease, height 0.5s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

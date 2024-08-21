@@ -1,10 +1,12 @@
 "use client";
 import React, { useEffect, useState, useRef } from "react";
 import styles from "@/styles/customCursor.module.css";
+import Image from "next/image";
 
 const Cursor = () => {
     const [position, setPosition] = useState({ x: 0, y: 0 });
     const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
+    const [cursorSize, setCursorSize] = useState(30);
     const requestRef = useRef<number | null>(null);
 
     useEffect(() => {
@@ -13,10 +15,28 @@ const Cursor = () => {
             setCursorPosition({ x: clientX, y: clientY });
         };
 
+        const handleMouseEnter = () => {
+            setCursorSize(120);
+        };
+
+        const handleMouseLeave = () => {
+            setCursorSize(30);
+        };
+
         window.addEventListener("mousemove", handleMouseMove);
+
+        const elements = document.querySelectorAll("a, button");
+        elements.forEach((element) => {
+            element.addEventListener("mouseenter", handleMouseEnter);
+            element.addEventListener("mouseleave", handleMouseLeave);
+        });
 
         return () => {
             window.removeEventListener("mousemove", handleMouseMove);
+            elements.forEach((element) => {
+                element.removeEventListener("mouseenter", handleMouseEnter);
+                element.removeEventListener("mouseleave", handleMouseLeave);
+            });
         };
     }, []);
 
@@ -52,13 +72,18 @@ const Cursor = () => {
         <div
             className={styles.cursor}
             style={{
-                position: "fixed",
-                top: position.y - 30 / 2,
-                left: position.x - 30 / 2,
-                width: `30px`,
-                height: `30px`,
-            }}
-        />
+                top: position.y - cursorSize / 2,
+                left: position.x - cursorSize / 2,
+                width: `${cursorSize}px`,
+                height: `${cursorSize}px`,
+            }}>
+            <Image
+                src={"/images/arrow.svg"}
+                alt="Arrow icon"
+                width={cursorSize === 30 ? 0 : 60}
+                height={cursorSize === 30 ? 0 : 60}
+            />
+        </div>
     );
 };
 

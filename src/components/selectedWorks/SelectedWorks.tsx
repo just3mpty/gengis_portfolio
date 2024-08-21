@@ -1,28 +1,56 @@
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import styles from "@/styles/selectedWorks.module.css";
 import ProjectCard from "./ProjectCard";
 
-const works = [
-    {
-        title: "Project title",
-        date: "08.18.2024",
-        cover: "/images/205.png",
-        url: "/qdfbn",
-    },
-    {
-        title: "Project title",
-        date: "08.18.2024",
-        cover: "/images/morflax-studio.png",
-        url: "/aerbohj",
-    },
-];
+interface ProjectType {
+    title: string;
+    images: string[];
+    date: string;
+    description: string;
+    tools: string[];
+    highlight: boolean;
+}
+
+interface DataType {
+    category: string;
+    projects: ProjectType[];
+}
 
 const SelectedWorks = () => {
+    const [data, setData] = useState<DataType[]>([]);
+
+    useEffect(() => {
+        const fetchProjects = async () => {
+            const response = await fetch("/projects.json");
+            const data = await response.json();
+            setData(data);
+        };
+
+        fetchProjects();
+    }, []);
+
     return (
         <div className={styles.container}>
-            {works.map((project, idx) => (
-                <ProjectCard key={idx} {...project} />
-            ))}
+            {data.map((category) => {
+                const highlightedProjects = category.projects.filter(
+                    (project) => project.highlight
+                );
+
+                const projectToShow = highlightedProjects[0];
+
+                if (!projectToShow) return null;
+
+                return (
+                    <ProjectCard
+                        key={category.category}
+                        title={projectToShow.title}
+                        date={projectToShow.date}
+                        url={`/works/${category.category}`}
+                        cover={projectToShow.images[0]}
+                    />
+                );
+            })}
         </div>
     );
 };

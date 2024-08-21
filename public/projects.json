@@ -7,6 +7,14 @@
                 "images": ["/images/205.png", "/images/morflax-studio.png"],
                 "date": "08.19.2024",
                 "description": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nisi, temporibus eius, eaque illo ex recusandae soluta reiciendis ipsam corrupti modi, impedit optio assumenda cupiditate rem?",
+                "tools": ["Blender", "Photoshop"],
+                "highlight": true
+            },
+            {
+                "title": "Test Freelance",
+                "images": ["/images/205.png", "/images/morflax-studio.png"],
+                "date": "08.19.2024",
+                "description": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nisi, temporibus eius, eaque illo ex recusandae soluta reiciendis ipsam corrupti modi, impedit optio assumenda cupiditate rem?",
                 "tools": ["Blender", "Photoshop"]
             },
             {
@@ -28,6 +36,14 @@
     {
         "category": "personnal",
         "projects": [
+            {
+                "title": "Test Perso",
+                "images": ["/images/205.png", "/images/morflax-studio.png"],
+                "date": "08.19.2024",
+                "description": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nisi, temporibus eius, eaque illo ex recusandae soluta reiciendis ipsam corrupti modi, impedit optio assumenda cupiditate rem?",
+                "tools": ["Blender", "Photoshop"],
+                "highlight": true
+            },
             {
                 "title": "Test Perso",
                 "images": ["/images/205.png", "/images/morflax-studio.png"],
