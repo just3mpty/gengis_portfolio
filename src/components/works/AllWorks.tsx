@@ -1,7 +1,6 @@
 "use client";
 import React, { useState } from "react";
 import styles from "@/styles/works.module.css";
-import Image from "next/image";
 import Link from "next/link";
 import { ParallaxBanner, ParallaxBannerLayer } from "react-scroll-parallax";
 

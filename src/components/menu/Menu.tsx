@@ -2,6 +2,7 @@
 import React from "react";
 import styles from "@/styles/menu.module.css";
 import Link from "next/link";
+import Image from "next/image";
 
 type Menu = {
     isOpen: boolean;
@@ -44,6 +45,9 @@ const Menu = ({ isOpen, click }: Menu) => {
                         </li>
                     ))}
                 </ul>
+                <Link className={styles.dashboard} href={"/dashboard"}>
+                    <Image src={"/images/lock.svg"} alt="Lock icon" fill />
+                </Link>
             </nav>
         </div>
     );

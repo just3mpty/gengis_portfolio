@@ -1,0 +1,47 @@
+.dashboardContainer {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 60px;
+
+    & .title {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+        text-align: center;
+
+        & h1 {
+            font-size: 60px;
+            text-transform: uppercase;
+
+            & span {
+                color: var(--accent);
+            }
+        }
+    }
+
+    & .buttons {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 30px;
+
+        & button {
+            all: unset;
+            padding: 25px 60px;
+            background: var(--white);
+            font-weight: 900;
+            text-transform: uppercase;
+            color: var(--black);
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        & button:hover {
+            background: var(--accent);
+        }
+    }
+}
