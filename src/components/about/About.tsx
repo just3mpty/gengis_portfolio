@@ -20,10 +20,11 @@ const About = () => {
                         artist.
                     </p>
                     <p>
-                        With a passion for storytelling and a keen eye for
-                        detail, I seamlessly blend art and technology to create{" "}
-                        <span>captivating content</span>. My work reflects a
-                        commitment to innovation and excellence.
+                        3D enjoyer and visual storyteller, creating{" "}
+                        <span>captivating</span> digital art and designs. With a
+                        keen eye for detail and a passion for aesthetics, I
+                        craft unique and engaging{" "}
+                        <span>visual experiences</span>.
                     </p>
                 </div>
             </div>
