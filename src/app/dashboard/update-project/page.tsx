@@ -1,13 +1,15 @@
 "use client";
-import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import styles from "@/styles/dashboard.module.css";
 import ProjectCard from "@/components/selectedWorks/ProjectCard";
+import EditPopup from "@/components/dashboard/EditPopup";
+import Link from "next/link";
 
 interface Projects {
     category: string;
     projects: Project[];
 }
+
 interface Project {
     title: string;
     description: string;
@@ -16,38 +18,68 @@ interface Project {
 }
 
 const UpdateProjectPage = () => {
-    const [allProjects, setAllProject] = useState<Projects[]>([]);
+    const [allProjects, setAllProjects] = useState<Projects[]>([]);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [selectedProject, setSelectedProject] = useState<Project | null>(
+        null
+    );
 
     useEffect(() => {
         const fetchProjects = async () => {
+            setIsLoading(true);
             const res = await fetch("/projects.json");
             const data: Projects[] = await res.json();
-            setAllProject(data);
+            setAllProjects(data);
+            setIsLoading(false);
         };
         fetchProjects();
-    });
+    }, []);
+
+    const handleProjectClick = (project: Project) => {
+        setSelectedProject(project);
+    };
+
+    const handleClosePopup = () => {
+        setSelectedProject(null);
+    };
+
+    const handleUpdateProject = (updatedProject: Project) => {
+        // Logique pour mettre à jour le projet dans la BDD ici
+        // Par exemple, via un appel API PATCH ou PUT
+    };
 
     return (
         <div className={styles.addProject}>
             <h1>Modifier un projet</h1>
             {allProjects.map((cat, idx) => (
                 <div className={styles.updateProject} key={idx}>
-                    <h2>{cat.category}</h2>
+                    <h2>{cat.category} projects</h2>
                     <div className={styles.project}>
                         {cat.projects.map((project, idx) => (
-                            <ProjectCard
+                            <div
                                 key={idx}
-                                title={project.title}
-                                cover={project.images[0]}
-                                url={""}
-                            />
+                                onClick={() => handleProjectClick(project)}>
+                                <ProjectCard
+                                    title={project.title}
+                                    cover={project.images[0]}
+                                    url={""}
+                                />
+                            </div>
                         ))}
                     </div>
+                    <div className={styles.divider} />
                 </div>
             ))}
             <Link className={styles.goBack} href={"/dashboard"}>
                 Go back
             </Link>
+            {selectedProject && (
+                <EditPopup
+                    project={selectedProject}
+                    onClose={handleClosePopup}
+                    onSave={handleUpdateProject}
+                />
+            )}
         </div>
     );
 };

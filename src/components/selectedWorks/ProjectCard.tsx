@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "@/styles/selectedWorks.module.css";
+import styles from "@/styles/projectCard.module.css";
 import Image from "next/image";
 import Link from "next/link";
 
