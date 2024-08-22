@@ -4,19 +4,10 @@
     flex-direction: column;
     gap: 5px;
 
-    & figure {
+    & .parallax {
         aspect-ratio: 2/1;
         height: 100%;
         overflow: hidden;
-
-        & img {
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
-
-        & img:hover {
-            transform: scale(1.1);
-        }
     }
 
     & .text {

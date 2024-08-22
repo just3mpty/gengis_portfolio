@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "@/styles/projectCard.module.css";
-import Image from "next/image";
 import Link from "next/link";
+import { ParallaxBanner, ParallaxBannerLayer } from "react-scroll-parallax";
 
 interface ProjectProps {
     title: string;
@@ -11,14 +11,22 @@ interface ProjectProps {
 }
 
 const ProjectCard = ({ title, date, cover, url }: ProjectProps) => {
+    const formattedDate = date
+        ? new Date(date).toISOString().split("T")[0].replace(/-/g, ".")
+        : undefined;
+
     return (
         <Link href={url} className={styles.card}>
-            <figure style={{ position: "relative" }}>
-                <Image src={cover} alt={`${title}'s illustration`} fill />
-            </figure>
+            <ParallaxBanner
+                className={styles.parallax}
+                style={{ position: "relative" }}>
+                <ParallaxBannerLayer speed={-15} image={cover} />
+            </ParallaxBanner>
             <div className={styles.text}>
                 <p>{title}</p>
-                <p className={styles.date}>{date}</p>
+                {formattedDate && (
+                    <p className={styles.date}>{formattedDate}</p>
+                )}
             </div>
         </Link>
     );

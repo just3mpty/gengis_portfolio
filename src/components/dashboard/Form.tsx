@@ -14,7 +14,7 @@ type Project = {
 };
 
 const Form = () => {
-    const [formData, setFormData] = useState<Project>({
+    const [formData, setFormData] = useState<any>({
         title: "",
         description: "",
         date: "",
@@ -24,7 +24,6 @@ const Form = () => {
         category: "",
     });
 
-    // Fonction pour gérer les changements dans les champs de texte, select, et checkbox
     const handleChange = (
         e: React.ChangeEvent<
             HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
@@ -32,7 +31,7 @@ const Form = () => {
     ) => {
         const { id, value, type } = e.target;
         if (type === "checkbox") {
-            const isChecked = (e.target as HTMLInputElement).checked; // Type narrowing pour les checkbox
+            const isChecked = (e.target as HTMLInputElement).checked;
             setFormData({
                 ...formData,
                 [id]: isChecked,
@@ -45,35 +44,51 @@ const Form = () => {
         }
     };
 
-    // Fonction pour gérer l'ajout d'une nouvelle image
     const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const files = Array.from(e.target.files || []);
-        setFormData((prev) => ({ ...prev, images: files }));
+        setFormData((prev: any) => ({ ...prev, images: files }));
     };
 
-    // Fonction pour ajouter un nouvel outil
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+
+        const data = new FormData();
+        data.append("title", formData.title);
+        data.append("description", formData.description);
+        data.append("date", formData.date);
+        data.append("highlight", String(formData.highlight));
+        data.append("category", formData.category);
+
+        formData.images.forEach((file: File) => {
+            data.append("images", file);
+        });
+
+        const response = await fetch("/api/add-project", {
+            method: "POST",
+            body: data,
+        });
+
+        const result: Project = await response.json();
+        console.log(result);
+    };
+
     const addTool = () => {
-        setFormData((prev) => ({ ...prev, tools: [...prev.tools, ""] }));
+        setFormData((prev: { tools: any }) => ({
+            ...prev,
+            tools: [...prev.tools, ""],
+        }));
     };
 
-    // Fonction pour mettre à jour un outil existant
     const handleToolChange = (index: number, value: string) => {
-        const updatedTools = formData.tools.map((tool, i) =>
+        const updatedTools = formData.tools.map((tool: string, i: number) =>
             i === index ? value : tool
         );
-        setFormData((prev) => ({ ...prev, tools: updatedTools }));
-    };
-
-    // Fonction pour gérer la soumission du formulaire (à implémenter avec une API ou autre)
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        // Ici, tu pourras ajouter ta logique pour envoyer les données via une API
-        console.log(formData);
+        setFormData((prev: any) => ({ ...prev, tools: updatedTools }));
     };
 
     return (
         <form onSubmit={handleSubmit}>
-            {/* Menu pour choisir la catégorie du projet (freelance ou personnal) */}
+            {/* Menu pour choisir la catégorie du projet */}
             <div className={styles.input}>
                 <label htmlFor="category">Catégorie</label>
                 <select
@@ -155,18 +170,27 @@ const Form = () => {
                         nouveau champ de saisie avec le bouton "Ajouter un
                         outil"
                     </p>
-                    {formData.tools.map((tool, index) => (
-                        <div key={index}>
-                            <input
-                                placeholder="Exemple: Blender"
-                                type="text"
-                                value={tool}
-                                onChange={(e) =>
-                                    handleToolChange(index, e.target.value)
-                                }
-                            />
-                        </div>
-                    ))}
+                    {formData.tools.map(
+                        (
+                            tool:
+                                | string
+                                | number
+                                | readonly string[]
+                                | undefined,
+                            index: number
+                        ) => (
+                            <div key={index}>
+                                <input
+                                    placeholder="Exemple: Blender"
+                                    type="text"
+                                    value={tool}
+                                    onChange={(e) =>
+                                        handleToolChange(index, e.target.value)
+                                    }
+                                />
+                            </div>
+                        )
+                    )}
                     <button type="button" onClick={addTool}>
                         Ajouter un outil
                     </button>

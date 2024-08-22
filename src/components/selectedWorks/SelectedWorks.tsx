@@ -2,6 +2,8 @@
 import React, { useEffect, useState } from "react";
 import styles from "@/styles/selectedWorks.module.css";
 import ProjectCard from "./ProjectCard";
+import { DB } from "@/utils/firebaseConfig"; // Import de la config Firebase
+import { collection, getDocs, query, where } from "firebase/firestore"; // Import des fonctions nécessaires de Firestore
 
 interface ProjectType {
     title: string;
@@ -10,47 +12,43 @@ interface ProjectType {
     description: string;
     tools: string[];
     highlight: boolean;
-}
-
-interface DataType {
     category: string;
-    projects: ProjectType[];
 }
 
 const SelectedWorks = () => {
-    const [data, setData] = useState<DataType[]>([]);
+    const [projects, setProjects] = useState<ProjectType[]>([]);
 
     useEffect(() => {
-        const fetchProjects = async () => {
-            const response = await fetch("/projects.json");
-            const data = await response.json();
-            setData(data);
+        const fetchHighlightedProjects = async () => {
+            try {
+                const q = query(
+                    collection(DB, "projects"),
+                    where("highlight", "==", true)
+                );
+                const querySnapshot = await getDocs(q);
+                const highlightedProjects = querySnapshot.docs.map(
+                    (doc) => doc.data() as ProjectType
+                );
+                setProjects(highlightedProjects);
+            } catch (error) {
+                console.error("Error fetching highlighted projects:", error);
+            }
         };
 
-        fetchProjects();
+        fetchHighlightedProjects();
     }, []);
 
     return (
         <div className={styles.container}>
-            {data.map((category) => {
-                const highlightedProjects = category.projects.filter(
-                    (project) => project.highlight
-                );
-
-                const projectToShow = highlightedProjects[0];
-
-                if (!projectToShow) return null;
-
-                return (
-                    <ProjectCard
-                        key={category.category}
-                        title={projectToShow.title}
-                        date={projectToShow.date}
-                        url={`/works/${category.category}`}
-                        cover={projectToShow.images[0]}
-                    />
-                );
-            })}
+            {projects.map((project) => (
+                <ProjectCard
+                    key={project.title}
+                    title={project.title}
+                    date={project.date}
+                    url={`/works/${project.category}`}
+                    cover={project.images[0]}
+                />
+            ))}
         </div>
     );
 };

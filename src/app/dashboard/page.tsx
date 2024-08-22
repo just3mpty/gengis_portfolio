@@ -5,6 +5,7 @@ import styles from "@/styles/dashboard.module.css";
 
 const Dashboard = () => {
     const router = useRouter();
+
     return (
         <section className={styles.dashboardContainer}>
             {/* Vérifier la connexion admin avant d'afficher le formulaire */}
