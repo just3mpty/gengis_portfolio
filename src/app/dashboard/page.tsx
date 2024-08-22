@@ -27,7 +27,7 @@ const Dashboard = () => {
                     Modifier un projet
                 </button>
                 <button
-                    onClick={() => router.push("/dashboard/create-project")}>
+                    onClick={() => router.push("/dashboard/delete-project")}>
                     Supprimer un projet
                 </button>
             </div>

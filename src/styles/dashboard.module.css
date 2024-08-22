@@ -172,6 +172,18 @@
             flex-direction: column;
             gap: 15px;
 
+            & figure {
+                width: 100%;
+                aspect-ratio: 2/1;
+                border-radius: 15px;
+                overflow: hidden;
+                position: relative;
+
+                & img {
+                    object-fit: cover;
+                }
+            }
+
             & .input {
                 width: 100%;
                 max-width: 500px;
