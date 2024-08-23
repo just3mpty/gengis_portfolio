@@ -20,6 +20,14 @@
         color: var(--white);
         mix-blend-mode: difference;
     }
+    & h2 {
+        position: absolute;
+        font-size: 580px;
+        font-weight: 900;
+        color: var(--white);
+        filter: blur(15px);
+        z-index: -1;
+    }
 
     & .content {
         width: 100%;

@@ -43,6 +43,26 @@
         & button:hover {
             background: var(--accent);
         }
+
+        & .logButtons {
+            position: absolute;
+            bottom: 180px;
+            display: flex;
+            align-items: center;
+            gap: 30px;
+
+            & button {
+                background-color: var(--black);
+                border: 2px solid var(--accent);
+                color: var(--accent);
+            }
+
+            & button:hover {
+                background-color: var(--accent);
+                color: var(--black);
+                border: 2px solid var(--accent);
+            }
+        }
     }
 }
 

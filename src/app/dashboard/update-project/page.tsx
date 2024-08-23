@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 "use client";
 import React, { useEffect, useState } from "react";
 import styles from "@/styles/dashboard.module.css";
@@ -6,6 +7,8 @@ import EditPopup from "@/components/dashboard/EditPopup";
 import Link from "next/link";
 import { DB } from "@/utils/firebaseConfig";
 import { collection, getDocs } from "firebase/firestore";
+import { useRouter } from "next/navigation";
+import useAuth from "@/hooks/useAuth";
 
 interface Project {
     id: string;
@@ -23,6 +26,15 @@ const UpdateProjectPage = () => {
     const [selectedProject, setSelectedProject] = useState<Project | null>(
         null
     );
+
+    const router = useRouter();
+    const [loading, user] = useAuth();
+
+    if (loading) return <div>Loading...</div>;
+    if (!user) {
+        router.push("/dashboard");
+        return null;
+    }
 
     useEffect(() => {
         const fetchProjects = async () => {

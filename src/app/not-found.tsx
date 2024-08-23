@@ -7,10 +7,11 @@ import Scene from "@/components/canva/Scene";
 const NotFound = () => {
     return (
         <div className={styles.container}>
+            <h1>404</h1>
             <div className={styles.scene}>
                 <Scene />
             </div>
-            <h1>404</h1>
+            <h2>404</h2>
             <div className={styles.content}>
                 <p>Sorry, you asked for something that doesn’t exist...</p>
                 <div className={styles.links}>

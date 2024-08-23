@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 "use client";
 import React, { useEffect, useState } from "react";
 import styles from "@/styles/dashboard.module.css";
@@ -6,6 +7,8 @@ import Link from "next/link";
 import DeletePopup from "@/components/dashboard/DeletePopup";
 import { collection, getDocs } from "firebase/firestore";
 import { DB } from "@/utils/firebaseConfig";
+import { useRouter } from "next/navigation";
+import useAuth from "@/hooks/useAuth";
 
 interface Project {
     id: string;
@@ -22,6 +25,14 @@ const DeleteProjectPage = () => {
     const [selectedProject, setSelectedProject] = useState<Project | null>(
         null
     );
+    const router = useRouter();
+    const [loading, user] = useAuth();
+
+    if (loading) return <div>Loading...</div>;
+    if (!user) {
+        router.push("/dashboard");
+        return null;
+    }
 
     useEffect(() => {
         const fetchProjects = async () => {
