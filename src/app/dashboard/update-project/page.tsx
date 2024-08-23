@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 "use client";
 import React, { useEffect, useState } from "react";
 import styles from "@/styles/dashboard.module.css";
@@ -30,12 +29,6 @@ const UpdateProjectPage = () => {
     const router = useRouter();
     const [loading, user] = useAuth();
 
-    if (loading) return <div>Loading...</div>;
-    if (!user) {
-        router.push("/dashboard");
-        return null;
-    }
-
     useEffect(() => {
         const fetchProjects = async () => {
             setIsLoading(true);
@@ -60,6 +53,12 @@ const UpdateProjectPage = () => {
 
         fetchProjects();
     }, []);
+
+    if (loading) return <div>Loading...</div>;
+    if (!user) {
+        router.push("/dashboard");
+        return null;
+    }
 
     const handleProjectClick = (project: Project) => {
         setSelectedProject(project);

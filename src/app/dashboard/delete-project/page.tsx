@@ -28,12 +28,6 @@ const DeleteProjectPage = () => {
     const router = useRouter();
     const [loading, user] = useAuth();
 
-    if (loading) return <div>Loading...</div>;
-    if (!user) {
-        router.push("/dashboard");
-        return null;
-    }
-
     useEffect(() => {
         const fetchProjects = async () => {
             setIsLoading(true);
@@ -58,6 +52,12 @@ const DeleteProjectPage = () => {
 
         fetchProjects();
     }, []);
+
+    if (loading) return <div>Loading...</div>;
+    if (!user) {
+        router.push("/dashboard");
+        return null;
+    }
 
     const handleProjectClick = (project: Project) => {
         setSelectedProject(project);
