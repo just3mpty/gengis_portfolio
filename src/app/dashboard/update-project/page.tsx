@@ -56,7 +56,7 @@ const UpdateProjectPage = () => {
 
     if (loading) return <div>Loading...</div>;
     if (!user) {
-        router.push("/dashboard");
+        router.push("/home");
         return null;
     }
 
