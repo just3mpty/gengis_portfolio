@@ -27,7 +27,7 @@
 
 /* Transformation en X lorsque le menu est ouvert */
 .menuButton.open .bar:nth-child(1) {
-    transform: translateY(5px) rotate(45deg);
+    transform: translateY(4px) rotate(45deg);
     background-color: #f8f9fa;
 }
 
