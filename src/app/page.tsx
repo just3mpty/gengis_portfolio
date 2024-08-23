@@ -14,8 +14,8 @@ export default function Home() {
                 <div className={styles.title}>
                     <h1>Gengis</h1>
                     <h2>
-                        3D artist, <br />
-                        <span>digital</span> sculptor.
+                        Artist, <br />
+                        <span>3D</span> enjoyer.
                     </h2>
                 </div>
                 <div className={styles.scene}>

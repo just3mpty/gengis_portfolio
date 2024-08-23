@@ -15,11 +15,6 @@ const links: Links[] = [
         text: "Email",
         url: "mailto:gengis3d@gmail.com",
     },
-    {
-        icon: "/images/phone.svg",
-        text: "Phone",
-        url: "tel:+33659920450",
-    },
 ];
 const socials: Links[] = [
     {
@@ -31,11 +26,6 @@ const socials: Links[] = [
         icon: "/images/twitter.svg",
         text: "Twitter / X",
         url: "https://x.com/Gengis10_",
-    },
-    {
-        icon: "/images/twitch.svg",
-        text: "Twitch",
-        url: "https://www.twitch.tv/gengis10_",
     },
 ];
 

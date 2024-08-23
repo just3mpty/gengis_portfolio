@@ -9,18 +9,16 @@ const ToggleButton = () => {
     const toggleMenu = () => {
         setIsOpen(!isOpen);
     };
+
     return (
         <>
-            <button
+            <div
                 onClick={toggleMenu}
-                className={styles.menuButton}
-                style={
-                    isOpen
-                        ? {
-                              backgroundColor: "#f8f9fa",
-                          }
-                        : { backgroundColor: "#fbff4f" }
-                }></button>
+                className={`${styles.menuButton} ${isOpen ? styles.open : ""}`}>
+                <span className={styles.bar}></span>
+                <span className={styles.bar}></span>
+                <span className={styles.bar}></span>
+            </div>
             <Menu isOpen={isOpen} click={toggleMenu} />
         </>
     );

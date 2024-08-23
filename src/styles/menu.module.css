@@ -4,19 +4,45 @@
     position: fixed;
     top: 30px;
     right: 30px;
-    color: #fff;
-    border: none;
+    width: 30px; /* Largeur pour contenir les trois barres */
+    height: 30px; /* Hauteur totale pour les trois barres */
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
     cursor: pointer;
-    width: 15px;
-    height: 15px;
-    border-radius: 50%;
+    background: none; /* Enlever la couleur de fond */
+    border: none;
     transition: 0.3s;
     mix-blend-mode: difference;
 }
 
-& .menuButton:hover {
-    width: 30px;
-    border-radius: 5px;
+/* Hamburger bars */
+.menuButton .bar {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: #fbff4f;
+    transition: 0.3s;
+}
+
+/* Transformation en X lorsque le menu est ouvert */
+.menuButton.open .bar:nth-child(1) {
+    transform: translateY(5px) rotate(45deg);
+    background-color: #f8f9fa;
+}
+
+.menuButton.open .bar:nth-child(2) {
+    opacity: 0;
+}
+
+.menuButton.open .bar:nth-child(3) {
+    transform: translateY(-10px) rotate(-45deg);
+    background-color: #f8f9fa;
+}
+
+/* Hover effect */
+.menuButton:hover .bar {
+    background-color: #f8f9fa;
 }
 
 /* MENU */
@@ -28,7 +54,7 @@
     z-index: 100;
     position: fixed;
     top: 0;
-    right: -100%; /* Start off-screen */
+    right: -100%;
     width: 100%;
     height: 100vh;
     background-color: var(--black);
@@ -148,11 +174,13 @@
         bottom: 15px;
     }
 }
+
 @media (max-width: 500px) {
     .menuContainer nav ul a {
         font-size: 60px;
     }
 }
+
 @media (max-width: 350px) {
     .menuContainer nav ul a {
         font-size: 40px;

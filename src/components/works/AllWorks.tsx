@@ -7,12 +7,12 @@ import { ParallaxBanner, ParallaxBannerLayer } from "react-scroll-parallax";
 const Category = [
     {
         category: "freelance",
-        image: "/images/205.png",
+        image: "/images/freelance.png",
         text: "Freelance Projects",
     },
     {
         category: "personnal",
-        image: "/images/morflax-studio.png",
+        image: "/images/personnal.png",
         text: "Personnal stuff",
     },
 ];
@@ -22,12 +22,12 @@ const AllWorks = () => {
         Array(Category.length).fill(false)
     );
     const [heights, setHeights] = useState<number[]>(
-        Array(Category.length).fill(150)
+        Array(Category.length).fill(200)
     );
 
     const handleMouseEnter = (index: number) => {
         const newHeights = [...heights];
-        newHeights[index] = 300;
+        newHeights[index] = 400;
         setHeights(newHeights);
 
         const newHovering = [...hovering];
@@ -37,7 +37,7 @@ const AllWorks = () => {
 
     const handleMouseLeave = (index: number) => {
         const newHeights = [...heights];
-        newHeights[index] = 150;
+        newHeights[index] = 200;
         setHeights(newHeights);
 
         const newHovering = [...hovering];
@@ -67,7 +67,10 @@ const AllWorks = () => {
                         <ParallaxBanner
                             style={
                                 hovering[idx]
-                                    ? { filter: "none", opacity: 1 }
+                                    ? {
+                                          filter: "none",
+                                          opacity: 1,
+                                      }
                                     : {
                                           filter: "grayscale(1)",
                                           opacity: 0.5,
@@ -76,7 +79,7 @@ const AllWorks = () => {
                             className={styles.parallax}>
                             <ParallaxBannerLayer
                                 image={cat.image}
-                                speed={-10}
+                                speed={-20}
                             />
                         </ParallaxBanner>
                         <p>{cat.text}</p>

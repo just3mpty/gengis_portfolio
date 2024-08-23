@@ -3,7 +3,7 @@ import { useFrame } from "@react-three/fiber";
 import { Mesh } from "three";
 import { useRef } from "react";
 
-const Model = () => {
+const Model = ({ scale }: any) => {
     const mesh = useRef<Mesh>(null);
     const { nodes } = useGLTF("/model/Gengis.glb");
 
@@ -14,7 +14,7 @@ const Model = () => {
     });
 
     return (
-        <group scale={8} position={[0, 0, 0]}>
+        <group scale={scale} position={[0, 0, 0]}>
             <primitive object={nodes.Gengis} ref={mesh}>
                 <MeshTransmissionMaterial
                     backside
