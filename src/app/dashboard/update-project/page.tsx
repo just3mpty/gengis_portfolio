@@ -82,6 +82,9 @@ const UpdateProjectPage = () => {
 
             <div className={styles.updateProject}>
                 <h2>Freelance Projects</h2>
+                {freelanceProjects.length < 1 && (
+                    <h3>Aucun projet dans cette catégorie chef !</h3>
+                )}
                 <div className={styles.project}>
                     {freelanceProjects.map((project) => (
                         <div
@@ -99,6 +102,9 @@ const UpdateProjectPage = () => {
                 <div className={styles.divider} />
 
                 <h2>Personal Projects</h2>
+                {personalProjects.length < 1 && (
+                    <h3>Aucun projet dans cette catégorie chef !</h3>
+                )}
                 <div className={styles.project}>
                     {personalProjects.map((project) => (
                         <div

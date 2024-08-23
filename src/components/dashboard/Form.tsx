@@ -65,6 +65,10 @@ const Form = () => {
             data.append("images", file);
         });
 
+        formData.tools.forEach((tool) => {
+            data.append("tools[]", tool);
+        });
+
         try {
             const response = await fetch("/api/add-project", {
                 method: "POST",
@@ -109,7 +113,6 @@ const Form = () => {
     return (
         <div className={styles.formContainer}>
             <form onSubmit={handleSubmit}>
-                {/* Menu pour choisir la catégorie du projet */}
                 <div className={styles.input}>
                     <label htmlFor="category">Catégorie</label>
                     <select

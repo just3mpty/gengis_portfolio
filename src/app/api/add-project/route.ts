@@ -12,8 +12,16 @@ export async function POST(request: Request) {
         const highlight = formData.get("highlight") === "true";
         const category = formData.get("category")?.toString();
         const images = formData.getAll("images") as File[];
+        const tools = formData.getAll("tools[]").map((tool) => tool.toString());
 
-        if (!title || !description || !date || !category || !images.length) {
+        if (
+            !title ||
+            !description ||
+            !date ||
+            !category ||
+            !images.length ||
+            !tools.length
+        ) {
             return NextResponse.json(
                 { message: "Missing required fields" },
                 { status: 400 }
@@ -26,9 +34,6 @@ export async function POST(request: Request) {
                     const storageRef = ref(STORAGE, `projects/${image.name}`);
                     await uploadBytes(storageRef, image);
                     const downloadURL = await getDownloadURL(storageRef);
-                    console.log(
-                        `Uploaded image ${image.name}, URL: ${downloadURL}`
-                    );
                     return downloadURL;
                 } catch (uploadError) {
                     console.error(
@@ -47,6 +52,7 @@ export async function POST(request: Request) {
             images: imageUrls,
             highlight,
             category,
+            tools,
         });
 
         return NextResponse.json(

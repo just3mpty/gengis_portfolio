@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 "use client";
 import React, { useEffect, useState } from "react";
 import styles from "@/styles/selectedWorks.module.css";
@@ -40,13 +41,14 @@ const SelectedWorks = () => {
 
     return (
         <div className={styles.container}>
+            {projects.length < 1 && <h3>Aucun projet n'est mis en avant</h3>}
             {projects.map((project) => (
                 <ProjectCard
                     key={project.title}
                     title={project.title}
                     date={project.date}
                     url={`/works/${project.category}`}
-                    cover={project.images[1]}
+                    cover={project.images[0]}
                 />
             ))}
         </div>
