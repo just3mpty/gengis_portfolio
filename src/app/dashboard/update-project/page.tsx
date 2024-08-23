@@ -14,6 +14,7 @@ interface Project {
     images: string[];
     highlight: boolean;
     category: string;
+    tools: string[];
 }
 
 const UpdateProjectPage = () => {
