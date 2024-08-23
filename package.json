@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@react-three/drei": "^9.111.3",
+    "@react-three/fiber": "^8.17.5",
     "@studio-freight/react-lenis": "^0.0.47",
     "@types/three": "^0.167.2",
     "firebase": "^10.13.0",
