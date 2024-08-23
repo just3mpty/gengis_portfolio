@@ -267,6 +267,12 @@
     align-items: center;
     justify-content: center;
 
+    & h3 {
+        padding: 15px;
+        border: 2px solid var(--accent);
+        text-transform: uppercase;
+    }
+
     & .project {
         display: grid;
         grid-template-columns: repeat(4, minmax(300px, 1fr));

@@ -93,6 +93,9 @@ const DeleteProjectPage = () => {
             <h1>Supprimer un projet</h1>
             <div className={styles.updateProject}>
                 <h2>Freelance Projects</h2>
+                {freelanceProjects.length < 1 && (
+                    <h3>Aucun projet dans cette catégorie chef !</h3>
+                )}
                 <div className={styles.project}>
                     {freelanceProjects.map((project) => (
                         <div
@@ -110,6 +113,9 @@ const DeleteProjectPage = () => {
                 <div className={styles.divider} />
 
                 <h2>Personal Projects</h2>
+                {personalProjects.length < 1 && (
+                    <h3>Aucun projet dans cette catégorie chef !</h3>
+                )}
                 <div className={styles.project}>
                     {personalProjects.map((project) => (
                         <div
