@@ -7,7 +7,7 @@ import Model from "./Model";
 const Scene = () => {
     return (
         <Canvas>
-            <directionalLight intensity={3} position={[0, 3, 2]} />
+            <OrbitControls dampingFactor={0.02} enableZoom={false} />
             <Environment preset="studio" />
             <Model />
         </Canvas>

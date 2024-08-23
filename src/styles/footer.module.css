@@ -45,3 +45,81 @@
         gap: 30px;
     }
 }
+
+/* Desktop (1200px and up) */
+@media (min-width: 1200px) {
+    .footer {
+        gap: 240px;
+    }
+
+    .footer .links:nth-child(3) {
+        gap: 30px;
+    }
+}
+
+/* Laptop (Between 992px and 1199px) */
+@media (max-width: 1199px) and (min-width: 992px) {
+    .footer {
+        gap: 120px;
+    }
+
+    .footer .links:nth-child(3) {
+        gap: 20px;
+    }
+
+    .footer h2 {
+        font-size: 50px;
+        top: 20px;
+        left: 20px;
+    }
+}
+
+/* Tablet (Between 768px and 991px) */
+@media (max-width: 991px) and (min-width: 768px) {
+    .footer {
+        gap: 60px;
+        flex-direction: column;
+        align-items: center;
+        height: auto;
+    }
+
+    .footer .links {
+        gap: 10px;
+        align-items: center;
+    }
+
+    .footer h2 {
+        font-size: 40px;
+        position: static;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .footer .links:nth-child(3) {
+        flex-direction: row;
+        gap: 5px;
+    }
+}
+
+/* Mobile (767px and below) */
+@media (max-width: 767px) {
+    .footer {
+        gap: 30px;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+    }
+
+    .footer .links {
+        gap: 5px;
+        align-items: center;
+        padding: 10px;
+    }
+
+    .footer h2 {
+        font-size: 30px;
+        position: static;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+}

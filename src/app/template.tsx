@@ -24,7 +24,6 @@ export default function Template({ children }: { children: ReactNode }) {
         "/dashboard/delete-project",
     ];
 
-    // Vérifier si la route actuelle fait partie des routes du dashboard
     const isDashboardRoute = dashboardRoutes.includes(pathname);
 
     return (

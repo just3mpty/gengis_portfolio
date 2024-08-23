@@ -25,3 +25,31 @@
         }
     }
 }
+
+/* Tablet (Between 768px and 991px) */
+@media (max-width: 991px) and (min-width: 768px) {
+    .container {
+        & .bannerContent {
+            & .banner {
+                margin-right: 10px;
+                & p {
+                    font-size: 30px;
+                }
+            }
+        }
+    }
+}
+
+/* Mobile (767px and below) */
+@media (max-width: 767px) {
+    .container {
+        & .bannerContent {
+            & .banner {
+                margin-right: 10px;
+                & p {
+                    font-size: 30px;
+                }
+            }
+        }
+    }
+}

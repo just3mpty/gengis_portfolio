@@ -3,4 +3,39 @@
     width: 100%;
     display: flex;
     gap: 15px;
+    flex-wrap: wrap;
+}
+
+/* Desktop (1200px and up) */
+@media (min-width: 1200px) {
+    .container {
+        padding: 120px 30px 0 30px;
+        gap: 15px;
+    }
+}
+
+/* Laptop (Between 992px and 1199px) */
+@media (max-width: 1199px) and (min-width: 992px) {
+    .container {
+        padding: 120px 30px 0 30px;
+        gap: 10px;
+    }
+}
+
+/* Tablet (Between 768px and 991px) */
+@media (max-width: 991px) and (min-width: 768px) {
+    .container {
+        padding: 60px 15px 0 15px;
+        gap: 30px;
+        flex-direction: column;
+    }
+}
+
+/* Mobile (767px and below) */
+@media (max-width: 767px) {
+    .container {
+        padding: 120px 15px 0 15px;
+        gap: 30px;
+        flex-direction: column; /* Passage en colonne pour les écrans mobiles */
+    }
 }

@@ -22,65 +22,139 @@
 /* MENU */
 .menuContainer {
     position: relative;
+}
 
-    & nav {
-        z-index: 100;
-        position: fixed;
-        top: 0;
-        width: 100%;
-        height: 100vh;
-        bottom: 0;
-        background-color: var(--black);
-        padding: 30px 120px;
-        transition: 0.6s ease;
+.menuContainer nav {
+    z-index: 100;
+    position: fixed;
+    top: 0;
+    right: -100%; /* Start off-screen */
+    width: 100%;
+    height: 100vh;
+    background-color: var(--black);
+    padding: 30px;
+    transition: right 0.3s ease-in-out; /* Smooth transition */
+}
 
-        & ul {
-            height: 100%;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            justify-content: space-between;
+.menuContainer nav.open {
+    right: 0; /* Slide in from the right when open */
+}
 
-            & li {
-                list-style-type: none;
+.menuContainer nav ul {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
 
-                & a {
-                    font-size: 150px;
-                    text-transform: uppercase;
-                    color: var(--WHITE, #f8f9fa);
-                    opacity: 0.25;
-                    font-weight: 900;
-                    transition: 0.3s;
+    list-style: none; /* Remove default list styling */
+}
 
-                    & span {
-                        font-size: 16px;
-                        color: var(--accent);
-                    }
-                }
-                & a:hover {
-                    opacity: 1;
-                    padding-right: 30px;
-                }
-            }
-        }
+.menuContainer nav li {
+    margin: 15px 0; /* Add spacing between links */
+}
 
-        & .dashboard {
-            width: 30px;
-            height: 30px;
-            position: absolute;
-            left: 30px;
-            bottom: 30px;
+.menuContainer nav a {
+    font-size: 150px;
+    text-transform: uppercase;
+    color: var(--WHITE, #f8f9fa);
+    opacity: 0.25;
+    font-weight: 900;
+    transition: opacity 0.3s, padding-right 0.3s;
+}
 
-            & img {
-                object-fit: contain;
-                opacity: 0.25;
-            }
+.menuContainer nav a span {
+    font-size: 16px;
+    color: var(--accent);
+}
 
-            & img:hover {
-                opacity: 1;
-                filter: hue-rotate(125deg);
-            }
-        }
+.menuContainer nav a:hover {
+    opacity: 1;
+    padding-right: 30px;
+}
+
+.menuContainer .dashboard {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    left: 30px;
+    bottom: 30px;
+}
+
+.menuContainer .dashboard img {
+    object-fit: contain;
+    opacity: 0.25;
+    transition: opacity 0.3s, filter 0.3s;
+}
+
+.menuContainer .dashboard img:hover {
+    opacity: 1;
+    filter: hue-rotate(125deg);
+}
+
+/* Desktop (1200px and up) */
+@media (min-width: 1200px) {
+    .menuContainer nav ul a {
+        font-size: 150px;
+    }
+}
+
+/* Laptop (Between 992px and 1199px) */
+@media (max-width: 1199px) and (min-width: 992px) {
+    .menuButton {
+        display: block;
+    }
+
+    .menuContainer nav ul a {
+        font-size: 120px;
+    }
+}
+
+/* Tablet (Between 768px and 991px) */
+@media (max-width: 991px) and (min-width: 768px) {
+    .menuContainer nav ul a {
+        font-size: 100px;
+    }
+
+    .menuContainer nav {
+        padding: 20px;
+    }
+
+    .menuContainer .dashboard {
+        width: 25px;
+        height: 25px;
+        left: 20px;
+        bottom: 20px;
+    }
+}
+
+/* Mobile (767px and below) */
+@media (max-width: 767px) {
+    .menuContainer nav ul a {
+        font-size: 80px;
+    }
+
+    .menuContainer nav {
+        padding: 15px;
+    }
+
+    .menuContainer .dashboard {
+        width: 20px;
+        height: 20px;
+        left: 15px;
+        bottom: 15px;
+    }
+}
+@media (max-width: 500px) {
+    .menuContainer nav ul a {
+        font-size: 60px;
+    }
+}
+@media (max-width: 350px) {
+    .menuContainer nav ul a {
+        font-size: 40px;
     }
 }

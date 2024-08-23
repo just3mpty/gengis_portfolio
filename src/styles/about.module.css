@@ -9,6 +9,7 @@
         font-weight: 300;
         text-transform: uppercase;
         margin-bottom: 120px;
+        color: var(--white);
 
         & span {
             font-weight: 900;
@@ -18,42 +19,153 @@
 
     & .content {
         display: flex;
-        align-items: center;
         gap: 120px;
+    }
 
-        & .parallax {
-            max-width: 500px;
-            /* position: relative; */
-            aspect-ratio: 1/1;
+    & .parallax {
+        max-width: 500px;
+        aspect-ratio: 1/1;
 
-            & img {
-                object-fit: cover;
+        & img {
+            object-fit: cover;
+        }
+    }
+
+    & .text {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        gap: 30px;
+        max-width: 500px;
+
+        & p {
+            font-size: 20px;
+            font-weight: 300;
+            line-height: 1.5;
+
+            & span {
+                text-decoration: underline;
+                text-underline-position: under;
+                color: var(--accent);
             }
         }
 
+        & p:nth-child(2) span {
+            font-weight: 600;
+            text-decoration: none;
+        }
+    }
+}
+
+/* Desktop (1200px and up) */
+@media (min-width: 1200px) {
+    .container {
+        padding: 30px;
+        margin-top: 120px;
+
+        & h2 {
+            font-size: 150px;
+            margin-bottom: 120px;
+        }
+
+        & .content {
+            gap: 120px;
+        }
+
+        & .parallax {
+            max-width: 500px;
+        }
+
         & .text {
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
+            max-width: 500px;
             gap: 30px;
-            width: 500px;
+        }
+    }
+}
+
+/* Laptop (Between 992px and 1199px) */
+@media (max-width: 1199px) and (min-width: 992px) {
+    .container {
+        padding: 30px;
+        margin-top: 100px;
+
+        & h2 {
+            font-size: 120px;
+            margin-bottom: 100px;
+        }
+
+        & .content {
+            gap: 60px;
+        }
+
+        & .parallax {
+            max-width: 400px;
+        }
+
+        & .text {
+            max-width: 400px;
+            gap: 20px;
+        }
+    }
+}
+
+/* Tablet (Between 768px and 991px) */
+@media (max-width: 991px) and (min-width: 768px) {
+    .container {
+        padding: 30px;
+        margin-top: 80px;
+
+        & h2 {
+            font-size: 90px;
+            margin-bottom: 80px;
+        }
+
+        & .content {
+            flex-direction: column;
+            justify-content: flex-start;
+            gap: 40px;
+        }
+
+        & .parallax {
+            max-width: 100%;
+            max-width: 500px;
             aspect-ratio: 1/1;
+        }
 
-            & p {
-                font-size: 20px;
-                font-weight: 300;
+        & .text {
+            max-width: 75%;
+            gap: 20px;
+        }
+    }
+}
 
-                & span {
-                    text-decoration: underline;
-                    text-underline-position: under;
-                    color: var(--accent);
-                }
-            }
+/* Mobile (767px and below) */
+@media (max-width: 767px) {
+    .container {
+        padding: 15px;
+        margin-top: 60px;
 
-            & p:nth-child(2) span {
-                font-weight: 600;
-                text-decoration: none;
-            }
+        & h2 {
+            font-size: 60px;
+            margin-bottom: 60px;
+            text-align: center;
+        }
+
+        & .content {
+            flex-direction: column;
+            justify-content: flex-start;
+            gap: 30px;
+        }
+
+        & .parallax {
+            max-width: 300px;
+            width: 100%;
+            aspect-ratio: 1/1;
+        }
+
+        & .text {
+            max-width: 100%;
+            gap: 15px;
         }
     }
 }

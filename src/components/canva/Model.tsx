@@ -5,18 +5,26 @@ import { useRef } from "react";
 
 const Model = () => {
     const mesh = useRef<Mesh>(null);
-    const { nodes } = useGLTF("/model/rose.glb");
+    const { nodes } = useGLTF("/model/Gengis.glb");
 
     useFrame(() => {
         if (mesh.current) {
-            mesh.current.rotation.z -= 0.005;
+            mesh.current.rotation.y += 0.005;
+            mesh.current.rotation.x += 0.005;
         }
     });
 
     return (
-        <group scale={15} position={[1, 0, 0]}>
-            <primitive object={nodes.rose} ref={mesh}>
-                <MeshTransmissionMaterial metalness={1} color={0xffffff} />
+        <group scale={10} position={[0, 0, 0]}>
+            <primitive object={nodes.Gengis} ref={mesh}>
+                <MeshTransmissionMaterial
+                    backside
+                    backsideThickness={0.25}
+                    thickness={5}
+                    distortion={2}
+                    color={0xf8f9fa}
+                    metalness={0.25}
+                />
             </primitive>
         </group>
     );
