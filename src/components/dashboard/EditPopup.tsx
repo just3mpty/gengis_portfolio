@@ -11,6 +11,7 @@ interface Project {
     images: string[];
     highlight: boolean;
     category: string;
+    tools: string[]; // Ajout du champ tools
 }
 
 interface ProjectEditPopupProps {
@@ -46,6 +47,11 @@ const EditPopup: React.FC<ProjectEditPopupProps> = ({
         }
     };
 
+    const handleToolsChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+        const toolsArray = e.target.value.split(",").map((tool) => tool.trim());
+        setUpdatedProject((prev) => ({ ...prev, tools: toolsArray }));
+    };
+
     const handleSave = async () => {
         try {
             const updatedImages = [...updatedProject.images];
@@ -74,6 +80,7 @@ const EditPopup: React.FC<ProjectEditPopupProps> = ({
                 images: updatedImages,
                 highlight: updatedProject.highlight,
                 category: updatedProject.category,
+                tools: updatedProject.tools, // Sauvegarder les outils
             });
 
             onSave({ ...updatedProject, images: updatedImages });
@@ -121,6 +128,16 @@ const EditPopup: React.FC<ProjectEditPopupProps> = ({
                         accept="image/png, image/jpeg, image/webp"
                         multiple
                         onChange={handleImagesChange}
+                    />
+                </div>
+                <div className={styles.input}>
+                    <label htmlFor="tools">
+                        Outils (séparés par des virgules)
+                    </label>
+                    <textarea
+                        id="tools"
+                        value={updatedProject.tools.join(", ")}
+                        onChange={handleToolsChange}
                     />
                 </div>
                 <button onClick={handleSave}>Save</button>
