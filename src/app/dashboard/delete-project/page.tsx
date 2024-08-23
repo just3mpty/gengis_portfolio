@@ -4,21 +4,20 @@ import styles from "@/styles/dashboard.module.css";
 import ProjectCard from "@/components/selectedWorks/ProjectCard";
 import Link from "next/link";
 import DeletePopup from "@/components/dashboard/DeletePopup";
-
-interface Projects {
-    category: string;
-    projects: Project[];
-}
+import { collection, getDocs } from "firebase/firestore";
+import { DB } from "@/utils/firebaseConfig";
 
 interface Project {
+    id: string;
     title: string;
     description: string;
     images: string[];
     highlight: boolean;
+    category: string;
 }
 
 const DeleteProjectPage = () => {
-    const [allProjects, setAllProjects] = useState<Projects[]>([]);
+    const [allProjects, setAllProjects] = useState<Project[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [selectedProject, setSelectedProject] = useState<Project | null>(
         null
@@ -27,11 +26,25 @@ const DeleteProjectPage = () => {
     useEffect(() => {
         const fetchProjects = async () => {
             setIsLoading(true);
-            const res = await fetch("/projects.json");
-            const data: Projects[] = await res.json();
-            setAllProjects(data);
+            try {
+                const projectsCollection = collection(DB, "projects");
+                const querySnapshot = await getDocs(projectsCollection);
+
+                const projects = querySnapshot.docs.map((doc) => ({
+                    id: doc.id,
+                    ...doc.data(),
+                })) as Project[];
+
+                setAllProjects(projects);
+            } catch (error) {
+                console.error(
+                    "Erreur lors de la récupération des projets :",
+                    error
+                );
+            }
             setIsLoading(false);
         };
+
         fetchProjects();
     }, []);
 
@@ -46,51 +59,71 @@ const DeleteProjectPage = () => {
     const handleDeleteProject = async () => {
         if (!selectedProject) return;
 
-        // Logique pour supprimer le projet de la BDD ici
-        // Par exemple, via un appel API DELETE
         try {
-            await fetch(`/api/deleteProject/${selectedProject.title}`, {
-                method: "DELETE",
-            });
+            const response = await fetch(
+                `/api/delete-project/${selectedProject.id}`,
+                {
+                    method: "DELETE",
+                }
+            );
 
-            // Mise à jour de l'état pour retirer le projet supprimé
+            if (!response.ok) {
+                throw new Error("Erreur lors de la suppression du projet");
+            }
+
             setAllProjects((prevProjects) =>
-                prevProjects.map((cat) => ({
-                    ...cat,
-                    projects: cat.projects.filter(
-                        (proj) => proj.title !== selectedProject.title
-                    ),
-                }))
+                prevProjects.filter((proj) => proj.id !== selectedProject.id)
             );
         } catch (error) {
-            console.error("Failed to delete project", error);
+            console.error("Échec de la suppression du projet", error);
         } finally {
-            handleClosePopup(); // Fermer le popup après la suppression
+            handleClosePopup();
         }
     };
+
+    const freelanceProjects = allProjects.filter(
+        (project) => project.category === "freelance"
+    );
+    const personalProjects = allProjects.filter(
+        (project) => project.category === "personnal"
+    );
 
     return (
         <div className={styles.addProject}>
             <h1>Supprimer un projet</h1>
-            {allProjects.map((cat, idx) => (
-                <div className={styles.updateProject} key={idx}>
-                    <h2>{cat.category} projects</h2>
-                    <div className={styles.project}>
-                        {cat.projects.map((project, idx) => (
-                            <div
-                                key={idx}
-                                onClick={() => handleProjectClick(project)}>
-                                <ProjectCard
-                                    title={project.title}
-                                    cover={project.images[0]}
-                                    url={"#"}
-                                />
-                            </div>
-                        ))}
-                    </div>
-                    <div className={styles.divider} />
+            <div className={styles.updateProject}>
+                <h2>Freelance Projects</h2>
+                <div className={styles.project}>
+                    {freelanceProjects.map((project) => (
+                        <div
+                            key={project.id}
+                            onClick={() => handleProjectClick(project)}>
+                            <ProjectCard
+                                title={project.title}
+                                cover={project.images[0]}
+                                url={""}
+                            />
+                        </div>
+                    ))}
                 </div>
-            ))}
+
+                <div className={styles.divider} />
+
+                <h2>Personal Projects</h2>
+                <div className={styles.project}>
+                    {personalProjects.map((project) => (
+                        <div
+                            key={project.id}
+                            onClick={() => handleProjectClick(project)}>
+                            <ProjectCard
+                                title={project.title}
+                                cover={project.images[0]}
+                                url={""}
+                            />
+                        </div>
+                    ))}
+                </div>
+            </div>
             <Link className={styles.goBack} href={"/dashboard"}>
                 Go back
             </Link>

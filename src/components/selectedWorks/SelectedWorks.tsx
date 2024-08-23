@@ -2,8 +2,8 @@
 import React, { useEffect, useState } from "react";
 import styles from "@/styles/selectedWorks.module.css";
 import ProjectCard from "./ProjectCard";
-import { DB } from "@/utils/firebaseConfig"; // Import de la config Firebase
-import { collection, getDocs, query, where } from "firebase/firestore"; // Import des fonctions nécessaires de Firestore
+import { DB } from "@/utils/firebaseConfig";
+import { collection, getDocs, query, where } from "firebase/firestore";
 
 interface ProjectType {
     title: string;
@@ -26,9 +26,9 @@ const SelectedWorks = () => {
                     where("highlight", "==", true)
                 );
                 const querySnapshot = await getDocs(q);
-                const highlightedProjects = querySnapshot.docs.map(
-                    (doc) => doc.data() as ProjectType
-                );
+                const highlightedProjects = querySnapshot.docs
+                    .slice(0, 2)
+                    .map((doc) => doc.data() as ProjectType);
                 setProjects(highlightedProjects);
             } catch (error) {
                 console.error("Error fetching highlighted projects:", error);
@@ -46,7 +46,7 @@ const SelectedWorks = () => {
                     title={project.title}
                     date={project.date}
                     url={`/works/${project.category}`}
-                    cover={project.images[0]}
+                    cover={project.images[1]}
                 />
             ))}
         </div>

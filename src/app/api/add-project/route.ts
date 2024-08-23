@@ -20,17 +20,26 @@ export async function POST(request: Request) {
             );
         }
 
-        // Upload images to Firebase Storage
         const imageUrls = await Promise.all(
             images.map(async (image) => {
-                const storageRef = ref(STORAGE, `projects/${image.name}`);
-                await uploadBytes(storageRef, image);
-                const downloadURL = await getDownloadURL(storageRef);
-                return downloadURL;
+                try {
+                    const storageRef = ref(STORAGE, `projects/${image.name}`);
+                    await uploadBytes(storageRef, image);
+                    const downloadURL = await getDownloadURL(storageRef);
+                    console.log(
+                        `Uploaded image ${image.name}, URL: ${downloadURL}`
+                    );
+                    return downloadURL;
+                } catch (uploadError) {
+                    console.error(
+                        `Error uploading image ${image.name}:`,
+                        uploadError
+                    );
+                    throw uploadError;
+                }
             })
         );
 
-        // Add project to Firestore
         const docRef = await addDoc(collection(DB, "projects"), {
             title,
             description,

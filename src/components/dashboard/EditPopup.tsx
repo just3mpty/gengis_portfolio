@@ -1,13 +1,18 @@
-"use client";
 import { useState } from "react";
 import styles from "@/styles/dashboard.module.css";
+import { doc, updateDoc } from "firebase/firestore";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { DB, STORAGE } from "@/utils/firebaseConfig";
 
 interface Project {
+    id: string;
     title: string;
     description: string;
     images: string[];
     highlight: boolean;
+    category: string;
 }
+
 interface ProjectEditPopupProps {
     project: Project;
     onClose: () => void;
@@ -22,6 +27,7 @@ const EditPopup: React.FC<ProjectEditPopupProps> = ({
     const [updatedProject, setUpdatedProject] = useState<Project>({
         ...project,
     });
+    const [newImages, setNewImages] = useState<FileList | null>(null);
 
     const handleChange = (
         e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -34,9 +40,47 @@ const EditPopup: React.FC<ProjectEditPopupProps> = ({
         setUpdatedProject((prev) => ({ ...prev, highlight: e.target.checked }));
     };
 
-    const handleSave = () => {
-        onSave(updatedProject); // Sauvegarder les modifications
-        onClose(); // Fermer le popup
+    const handleImagesChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files) {
+            setNewImages(e.target.files);
+        }
+    };
+
+    const handleSave = async () => {
+        try {
+            const updatedImages = [...updatedProject.images];
+
+            if (newImages) {
+                const uploadPromises = Array.from(newImages).map(
+                    async (file) => {
+                        const storageRef = ref(
+                            STORAGE,
+                            `projects/${file.name}`
+                        );
+                        await uploadBytes(storageRef, file);
+                        const downloadURL = await getDownloadURL(storageRef);
+                        return downloadURL;
+                    }
+                );
+
+                const uploadedImages = await Promise.all(uploadPromises);
+                updatedImages.push(...uploadedImages);
+            }
+
+            const projectDocRef = doc(DB, "projects", updatedProject.id);
+            await updateDoc(projectDocRef, {
+                title: updatedProject.title,
+                description: updatedProject.description,
+                images: updatedImages,
+                highlight: updatedProject.highlight,
+                category: updatedProject.category,
+            });
+
+            onSave({ ...updatedProject, images: updatedImages });
+            onClose();
+        } catch (error) {
+            console.error("Erreur lors de la mise à jour du projet :", error);
+        }
     };
 
     return (
@@ -76,9 +120,7 @@ const EditPopup: React.FC<ProjectEditPopupProps> = ({
                         type="file"
                         accept="image/png, image/jpeg, image/webp"
                         multiple
-                        onChange={() => {
-                            /* Gestion du téléchargement des images */
-                        }}
+                        onChange={handleImagesChange}
                     />
                 </div>
                 <button onClick={handleSave}>Save</button>

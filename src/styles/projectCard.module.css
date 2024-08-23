@@ -10,6 +10,22 @@
         overflow: hidden;
     }
 
+    & figure {
+        aspect-ratio: 2/1;
+        height: 100%;
+        overflow: hidden;
+        position: relative;
+
+        & img {
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        & img:hover {
+            transform: scale(1.1);
+        }
+    }
+
     & .text {
         display: flex;
         width: 100%;

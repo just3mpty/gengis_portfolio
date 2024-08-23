@@ -4,21 +4,20 @@ import styles from "@/styles/dashboard.module.css";
 import ProjectCard from "@/components/selectedWorks/ProjectCard";
 import EditPopup from "@/components/dashboard/EditPopup";
 import Link from "next/link";
-
-interface Projects {
-    category: string;
-    projects: Project[];
-}
+import { DB } from "@/utils/firebaseConfig";
+import { collection, getDocs } from "firebase/firestore";
 
 interface Project {
+    id: string;
     title: string;
     description: string;
     images: string[];
     highlight: boolean;
+    category: string;
 }
 
 const UpdateProjectPage = () => {
-    const [allProjects, setAllProjects] = useState<Projects[]>([]);
+    const [allProjects, setAllProjects] = useState<Project[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [selectedProject, setSelectedProject] = useState<Project | null>(
         null
@@ -27,11 +26,25 @@ const UpdateProjectPage = () => {
     useEffect(() => {
         const fetchProjects = async () => {
             setIsLoading(true);
-            const res = await fetch("/projects.json");
-            const data: Projects[] = await res.json();
-            setAllProjects(data);
+            try {
+                const projectsCollection = collection(DB, "projects");
+                const querySnapshot = await getDocs(projectsCollection);
+
+                const projects = querySnapshot.docs.map((doc) => ({
+                    id: doc.id,
+                    ...doc.data(),
+                })) as Project[];
+
+                setAllProjects(projects);
+            } catch (error) {
+                console.error(
+                    "Erreur lors de la récupération des projets :",
+                    error
+                );
+            }
             setIsLoading(false);
         };
+
         fetchProjects();
     }, []);
 
@@ -44,35 +57,67 @@ const UpdateProjectPage = () => {
     };
 
     const handleUpdateProject = (updatedProject: Project) => {
-        // Logique pour mettre à jour le projet dans la BDD ici
-        // Par exemple, via un appel API PATCH ou PUT
+        setAllProjects((prevProjects) =>
+            prevProjects.map((proj) =>
+                proj.id === updatedProject.id ? updatedProject : proj
+            )
+        );
     };
+
+    // Séparer les projets par catégories
+    const freelanceProjects = allProjects.filter(
+        (project) => project.category === "freelance"
+    );
+    const personalProjects = allProjects.filter(
+        (project) => project.category === "personnal"
+    );
+
+    if (isLoading) {
+        return <div>Chargement...</div>;
+    }
 
     return (
         <div className={styles.addProject}>
             <h1>Modifier un projet</h1>
-            {allProjects.map((cat, idx) => (
-                <div className={styles.updateProject} key={idx}>
-                    <h2>{cat.category} projects</h2>
-                    <div className={styles.project}>
-                        {cat.projects.map((project, idx) => (
-                            <div
-                                key={idx}
-                                onClick={() => handleProjectClick(project)}>
-                                <ProjectCard
-                                    title={project.title}
-                                    cover={project.images[0]}
-                                    url={""}
-                                />
-                            </div>
-                        ))}
-                    </div>
-                    <div className={styles.divider} />
+
+            <div className={styles.updateProject}>
+                <h2>Freelance Projects</h2>
+                <div className={styles.project}>
+                    {freelanceProjects.map((project) => (
+                        <div
+                            key={project.id}
+                            onClick={() => handleProjectClick(project)}>
+                            <ProjectCard
+                                title={project.title}
+                                cover={project.images[0]}
+                                url={""}
+                            />
+                        </div>
+                    ))}
                 </div>
-            ))}
+
+                <div className={styles.divider} />
+
+                <h2>Personal Projects</h2>
+                <div className={styles.project}>
+                    {personalProjects.map((project) => (
+                        <div
+                            key={project.id}
+                            onClick={() => handleProjectClick(project)}>
+                            <ProjectCard
+                                title={project.title}
+                                cover={project.images[0]}
+                                url={""}
+                            />
+                        </div>
+                    ))}
+                </div>
+            </div>
+
             <Link className={styles.goBack} href={"/dashboard"}>
                 Go back
             </Link>
+
             {selectedProject && (
                 <EditPopup
                     project={selectedProject}

@@ -55,6 +55,11 @@
     padding: 30px;
     min-height: 100vh;
 
+    & h1 {
+        text-transform: uppercase;
+        font-size: 60px;
+    }
+
     & form {
         display: flex;
         flex-direction: column;
@@ -255,24 +260,23 @@
 }
 
 .updateProject {
+    gap: 60px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    align-items: center;
-    gap: 60px;
-    width: 100%;
-
-    & h2 {
-        text-transform: uppercase;
-        color: var(--accent);
-    }
+    justify-content: center;
 
     & .project {
         display: grid;
-        grid-template-columns: repeat(3, minmax(300px, 1fr));
+        grid-template-columns: repeat(4, minmax(300px, 1fr));
         gap: 5px;
         width: 100%;
         position: relative;
+    }
+    & h2 {
+        text-transform: uppercase;
+        color: var(--accent);
     }
 
     & .divider {
