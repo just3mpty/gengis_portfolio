@@ -9,13 +9,12 @@ const Model = () => {
 
     useFrame(() => {
         if (mesh.current) {
-            mesh.current.rotation.y += 0.005;
-            mesh.current.rotation.x += 0.005;
+            mesh.current.rotation.z += 0.005;
         }
     });
 
     return (
-        <group scale={10} position={[0, 0, 0]}>
+        <group scale={8} position={[0, 0, 0]}>
             <primitive object={nodes.Gengis} ref={mesh}>
                 <MeshTransmissionMaterial
                     backside

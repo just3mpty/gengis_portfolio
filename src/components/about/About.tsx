@@ -13,8 +13,8 @@ const About = () => {
             <div className={styles.content}>
                 <ParallaxBanner className={styles.parallax}>
                     <ParallaxBannerLayer
-                        speed={-10}
-                        image={"/images/205.png"}
+                        speed={-5}
+                        image={"/images/logo.png"}
                     />
                 </ParallaxBanner>
                 <div className={styles.text}>
