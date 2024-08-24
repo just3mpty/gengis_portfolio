@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Barlow } from "next/font/google";
 import "./globals.css";
+import { Analytics } from "@vercel/analytics/react";
 
 const barlow = Barlow({
     subsets: ["latin"],
@@ -24,11 +25,7 @@ export default function RootLayout({
         name: "Gengis",
         image: "https://pbs.twimg.com/profile_images/1668933141719908352/mA8pJmIl_400x400.jpg",
         "@id": "https://pbs.twimg.com/profile_images/1668933141719908352/mA8pJmIl_400x400.jpg",
-        url: "https://gengis3d.vercel.app/",
-
-        // AJOUTER TELEPHONE
-        telephone: "",
-        //
+        url: "https://www.3dgengis.com/",
 
         priceRange: "$$",
 
@@ -86,7 +83,10 @@ export default function RootLayout({
                     dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
                 />
             </head>
-            <body className={barlow.className}>{children}</body>
+            <body className={barlow.className}>
+                {children}
+                <Analytics />
+            </body>
         </html>
     );
 }
