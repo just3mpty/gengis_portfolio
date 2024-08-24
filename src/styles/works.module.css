@@ -302,7 +302,7 @@
 /* Mobile (767px and below) */
 @media (max-width: 767px) {
     .main {
-        gap: 0;
+        gap: 30px;
         & .project {
             flex-direction: column;
             padding: 0 10px;
