@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { DB, STORAGE } from "@/utils/firebaseConfig";
 import { collection, addDoc } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import sharp from "sharp";
 
 export async function POST(request: Request) {
     try {
@@ -31,8 +32,21 @@ export async function POST(request: Request) {
         const imageUrls = await Promise.all(
             images.map(async (image) => {
                 try {
-                    const storageRef = ref(STORAGE, `projects/${image.name}`);
-                    await uploadBytes(storageRef, image);
+                    const buffer = await image.arrayBuffer();
+
+                    const optimizedBuffer = await sharp(Buffer.from(buffer))
+                        .resize(800, 800, {
+                            fit: sharp.fit.inside,
+                            withoutEnlargement: true,
+                        })
+                        .webp({ quality: 80 })
+                        .toBuffer();
+
+                    const storageRef = ref(
+                        STORAGE,
+                        `projects/${image.name}.webp`
+                    );
+                    await uploadBytes(storageRef, optimizedBuffer);
                     const downloadURL = await getDownloadURL(storageRef);
                     return downloadURL;
                 } catch (uploadError) {

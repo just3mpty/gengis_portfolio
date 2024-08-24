@@ -42,10 +42,6 @@
                 position: relative;
                 opacity: 0.5;
                 transition: 0.3s ease;
-
-                & img {
-                    object-fit: cover;
-                }
             }
 
             & p {
