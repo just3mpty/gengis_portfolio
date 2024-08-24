@@ -34,7 +34,18 @@ const Category = ({ params }: { params: { category: string } }) => {
                     (doc) => doc.data() as ProjectType
                 );
 
-                setProjects(filteredProjects);
+                // Trier les projets selon les critères suivants :
+                const sortedProjects = filteredProjects.sort((a, b) => {
+                    // Le projet "highlight" en premier
+                    if (a.highlight && !b.highlight) return -1;
+                    if (!a.highlight && b.highlight) return 1;
+                    // Trier par date (du plus récent au plus ancien)
+                    return (
+                        new Date(b.date).getTime() - new Date(a.date).getTime()
+                    );
+                });
+
+                setProjects(sortedProjects);
             } catch (error) {
                 console.error(
                     "Erreur lors de la récupération des projets :",

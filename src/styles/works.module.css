@@ -213,7 +213,7 @@
 
             & figure {
                 width: 100%;
-                aspect-ratio: 2/1;
+                aspect-ratio: 16/9;
                 position: relative;
 
                 & img {
